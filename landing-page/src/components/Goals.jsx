@@ -1,5 +1,13 @@
 import React from 'react';
 import TargetImage from "../assets/img/alvo.png";
+import Partners from "./Partners";
+
+const partnersData = [
+  { name: "Parceiro 1", image: "./assets/partners/partner1.png" },
+  { name: "Parceiro 2", image: "./assets/partners/partner2.png" },
+  { name: "Parceiro 3", image: "./assets/partners/partner3.png" },
+  { name: "Parceiro 4", image: "./assets/partners/partner4.png" },
+];
 
 const Goals = () => {
   return (
@@ -22,6 +30,7 @@ const Goals = () => {
           <p className="text-lg">Beneficiar parceiros e sociedade com produtos e serviços.</p>
         </div>
       </div>
+      <Partners partners={partnersData} />
     </section>
   );
 };
