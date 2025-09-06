@@ -1,12 +1,21 @@
 import React from 'react';
 import TargetImage from "../assets/img/alvo.png";
 import Partners from "./Partners";
+import Parceiro1 from "../assets/img/parceiros/parceiro1.png";
+import Parceiro2 from "../assets/img/parceiros/parceiro2.png";
+import Parceiro3 from "../assets/img/parceiros/parceiro3.png";
+import Parceiro4 from "../assets/img/parceiros/parceiro4.png";
+import Parceiro5 from "../assets/img/parceiros/parceiro5.png";
+import BTB from "../assets/img/parceiros/btb.png";
 
 const partnersData = [
-  { name: "Parceiro 1", image: "./assets/partners/partner1.png" },
-  { name: "Parceiro 2", image: "./assets/partners/partner2.png" },
-  { name: "Parceiro 3", image: "./assets/partners/partner3.png" },
-  { name: "Parceiro 4", image: "./assets/partners/partner4.png" },
+    { name: "BTB", image: BTB },
+  { name: "Parceiro 1", image: Parceiro1 },
+  { name: "Parceiro 2", image: Parceiro2 },
+  { name: "Parceiro 3", image: Parceiro3 },
+  { name: "Parceiro 4", image: Parceiro4 },
+  { name: "Parceiro 5", image: Parceiro5 },
+  
 ];
 
 const Goals = () => {
