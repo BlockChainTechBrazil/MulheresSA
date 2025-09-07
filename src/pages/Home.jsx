@@ -1,9 +1,8 @@
-import Header from '../components/Navbar';
-import Footer from '../components/Footer';
 import Section from '../components/Hero';
 import Goals from '../components/Goals';
 import Bank from '../components/Bank';
 import PartnersSection from '../components/PartnersSection';
+import ProjectsSection from '../components/ProjectsSection';
 
 import Parceiro1 from "../assets/img/parceiros/parceiro1.png";
 import Parceiro2 from "../assets/img/parceiros/parceiro2.png";
@@ -26,6 +25,7 @@ export default function Home() {
     <>
       <Section />
       <Goals />
+      <ProjectsSection />
       <PartnersSection partners={partnersData}></PartnersSection>
       <Bank />
     </>
