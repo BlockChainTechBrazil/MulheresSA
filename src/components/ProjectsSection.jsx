@@ -151,6 +151,7 @@ const ProjectsSection = () => {
 const ProjectCard = ({ project, onDonate, loading }) => {
   const [donationAmount, setDonationAmount] = useState('');
   const [showDonationForm, setShowDonationForm] = useState(false);
+  const { isConnected, connectWallet } = useWeb3Contracts();
 
   const handleDonate = () => {
     if (!donationAmount || parseFloat(donationAmount) <= 0) {
@@ -212,16 +213,34 @@ const ProjectCard = ({ project, onDonate, loading }) => {
       {/* Footer com ação */}
       <div className="px-6 pb-6">
         {!showDonationForm ? (
-          <button
-            onClick={() => setShowDonationForm(true)}
-            disabled={daysLeft === 0}
-            className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 ${daysLeft === 0
+          isConnected ? (
+            <button
+              onClick={() => setShowDonationForm(true)}
+              disabled={daysLeft === 0}
+              className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 ${daysLeft === 0
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700'
-              }`}
-          >
-            {daysLeft === 0 ? '❌ Projeto Expirado' : '💝 Apoiar Projeto'}
-          </button>
+                }`}
+            >
+              {daysLeft === 0 ? '❌ Projeto Expirado' : '💝 Apoiar Projeto'}
+            </button>
+          ) : (
+            <button
+              onClick={async () => {
+                try {
+                  await connectWallet();
+                  // após conectar, abrir o formulário para doar
+                  setShowDonationForm(true);
+                } catch (err) {
+                  console.error('Erro ao conectar carteira:', err);
+                  alert('Erro ao conectar carteira: ' + err.message);
+                }
+              }}
+              className="w-full py-3 px-4 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700"
+            >
+              Conectar carteira para doar
+            </button>
+          )
         ) : (
           <div className="space-y-3">
             <input

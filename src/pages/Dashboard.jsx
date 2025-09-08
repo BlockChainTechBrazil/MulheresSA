@@ -46,24 +46,28 @@ export default function Dashboard() {
   // Carregar dados
   useEffect(() => {
     const loadData = async () => {
-      if (!contracts.mulheresSA || !isConnected) return;
+      if (!contracts.mulheresSA) return;
 
       try {
-        // Carregar estatísticas
+        // Carregar estatísticas (disponível mesmo sem conexão)
         const platformStats = await getPlatformStats();
         setStats(platformStats);
 
-        // Carregar projetos do usuário
-        const userProjectIds = await getUserProjects(walletAddress);
-        const userProjectData = await Promise.all(
-          userProjectIds.map(async (id) => {
-            const project = await getProject(id);
-            return { id, ...project };
-          })
-        );
-        setUserProjects(userProjectData);
+        // Carregar projetos do usuário (apenas se conectado)
+        if (isConnected && walletAddress) {
+          const userProjectIds = await getUserProjects(walletAddress);
+          const userProjectData = await Promise.all(
+            userProjectIds.map(async (id) => {
+              const project = await getProject(id);
+              return { id, ...project };
+            })
+          );
+          setUserProjects(userProjectData);
+        } else {
+          setUserProjects([]);
+        }
 
-        // Carregar todos os projetos (últimos 10)
+        // Carregar todos os projetos (últimos 10) — disponível sem carteira
         const totalProjects = platformStats.totalProjects;
         const allProjectsData = [];
         const startId = Math.max(1, totalProjects - 9);
@@ -87,22 +91,26 @@ export default function Dashboard() {
   }, [contracts.mulheresSA, isConnected, getPlatformStats, getUserProjects, getProject, walletAddress]);
 
   const refreshData = async () => {
-    if (!contracts.mulheresSA || !isConnected) return;
+    if (!contracts.mulheresSA) return;
 
     try {
       // Carregar estatísticas
       const platformStats = await getPlatformStats();
       setStats(platformStats);
 
-      // Carregar projetos do usuário
-      const userProjectIds = await getUserProjects(walletAddress);
-      const userProjectData = await Promise.all(
-        userProjectIds.map(async (id) => {
-          const project = await getProject(id);
-          return { id, ...project };
-        })
-      );
-      setUserProjects(userProjectData);
+      // Carregar projetos do usuário (se conectado)
+      if (isConnected && walletAddress) {
+        const userProjectIds = await getUserProjects(walletAddress);
+        const userProjectData = await Promise.all(
+          userProjectIds.map(async (id) => {
+            const project = await getProject(id);
+            return { id, ...project };
+          })
+        );
+        setUserProjects(userProjectData);
+      } else {
+        setUserProjects([]);
+      }
 
       // Carregar todos os projetos (últimos 10)
       const totalProjects = platformStats.totalProjects;
@@ -367,8 +375,8 @@ export default function Dashboard() {
                     <div
                       key={project.id}
                       className={`border-2 rounded-lg p-4 cursor-pointer transition-all hover:shadow-md ${donationForm.projectId === project.id.toString()
-                          ? 'border-green-500 bg-green-50'
-                          : 'border-gray-200 hover:border-green-300'
+                        ? 'border-green-500 bg-green-50'
+                        : 'border-gray-200 hover:border-green-300'
                         }`}
                       onClick={() => setDonationForm({ ...donationForm, projectId: project.id.toString() })}
                     >
