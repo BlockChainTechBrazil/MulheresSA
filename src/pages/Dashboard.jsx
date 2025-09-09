@@ -1,9 +1,9 @@
-
 import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useWeb3Contracts } from '../hooks/useContracts';
 import { CATEGORY_NAMES } from '../abis';
 import { Navigate } from 'react-router-dom';
+import { BiHomeAlt, BiBookmark, BiCog, BiFolder } from "react-icons/bi";
 
 export default function Dashboard() {
   const { isConnected, walletAddress } = useAuth();
@@ -26,6 +26,11 @@ export default function Dashboard() {
   const [userProjects, setUserProjects] = useState([]);
   const [allProjects, setAllProjects] = useState([]);
   const [activeTab, setActiveTab] = useState('overview');
+  const [dashboardStats, setDashboardStats] = useState({
+    balanceBRL: '2145',
+    transactions: '67',
+    projects: '6'
+  });
   const [newProject, setNewProject] = useState({
     name: '',
     description: '',
@@ -173,6 +178,47 @@ export default function Dashboard() {
           <div className="mt-4 p-4 bg-purple-50 rounded-lg">
             <p><strong>Carteira:</strong> {formatAddress(walletAddress)}</p>
             <p><strong>Status:</strong> <span className="text-green-600">Conectada ✅</span></p>
+          </div>
+        </div>
+
+        {/* Painel do Dashboard - Informações Principais */}
+        <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg shadow-lg p-6 mb-6 text-white">
+          <h2 className="text-xl font-semibold mb-4 text-white">Your Dashboard</h2>
+          
+          <div className="flex flex-wrap justify-between items-center gap-6">
+            {/* Saldo (BRL) */}
+            <div className="flex-1 text-center">
+              <p className="text-sm text-gray-300 mb-1">Saldo (BRL)</p>
+              <div className="flex items-center justify-center">
+                <span className="text-2xl font-bold text-yellow-400">R$</span>
+                <span className="text-2xl font-bold text-yellow-400 ml-1">{dashboardStats.balanceBRL}</span>
+              </div>
+            </div>
+            
+            {/* Transações */}
+            <div className="flex-1 text-center">
+              <p className="text-sm text-gray-300 mb-1">Transações</p>
+              <p className="text-3xl font-bold text-white">{dashboardStats.transactions}</p>
+            </div>
+            
+            {/* Carteiras Conectadas */}
+            <div className="flex-1 text-center">
+              <p className="text-sm text-gray-300 mb-1">Projetos</p>
+              <p className="text-3xl font-bold text-white">{dashboardStats.projects}</p>
+            </div>
+          </div>
+
+          {/* Botões de Ação */}
+          <div className="flex flex-wrap gap-4 mt-6 justify-center">
+            <button className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors duration-200">
+              Buy
+            </button>
+            <button className="bg-black hover:bg-gray-800 text-white px-6 py-2 rounded-lg transition-colors duration-200">
+              View
+            </button>
+            <button className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors duration-200">
+              Manage
+            </button>
           </div>
         </div>
 
@@ -657,6 +703,28 @@ export default function Dashboard() {
             </div>
           </div>
         )}
+
+        {/* Menu de Navegação no Rodapé */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white shadow-md border-t border-gray-200 md:hidden">
+          <div className="flex justify-around items-center py-2">
+            <button className="flex flex-col items-center text-gray-600 hover:text-purple-600">
+              <BiHomeAlt className="text-2xl" />
+              <span className="text-xs">Home</span>
+            </button>
+            <button className="flex flex-col items-center text-gray-600 hover:text-purple-600">
+              <BiBookmark className="text-2xl" />
+              <span className="text-xs">Favoritos</span>
+            </button>
+            <button className="flex flex-col items-center text-gray-600 hover:text-purple-600">
+              <BiCog className="text-2xl" />
+              <span className="text-xs">Configurações</span>
+            </button>
+            <button className="flex flex-col items-center text-gray-600 hover:text-purple-600">
+              <BiFolder className="text-2xl" />
+              <span className="text-xs">Arquivados</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -220,4 +220,9 @@ contract MulheresSA is ERC721, Ownable, ReentrancyGuard {
     function setBaseURI(string memory uri) external onlyOwner {
         _baseTokenURI = uri;
     }
+
+    function validateProjectCount() external view returns (bool) {
+        require(projectCount >= 0, "projectCount nao inicializado corretamente");
+        return true;
+    }
 }
