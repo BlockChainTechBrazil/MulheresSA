@@ -17,13 +17,14 @@ export const useWeb3Contracts = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Inicializar contratos
-  const initializeContracts = useCallback((signer) => {
+  // Inicializar contratos (aceita provider ou signer)
+  const initializeContracts = useCallback((connection) => {
     try {
+      if (!CONTRACT_ADDRESSES.MULHERES_SA) return;
       const mulheresSAContract = new ethers.Contract(
         CONTRACT_ADDRESSES.MULHERES_SA,
         MULHERES_SA_ABI,
-        signer
+        connection
       );
 
       setContracts({
@@ -58,6 +59,7 @@ export const useWeb3Contracts = () => {
 
       // Inicializar contratos se endereço estiver definido
       if (CONTRACT_ADDRESSES.MULHERES_SA) {
+        // Re-inicializa com signer para permitir transações
         initializeContracts(signer);
       }
 
@@ -77,6 +79,24 @@ export const useWeb3Contracts = () => {
       initializeContracts(signer);
     }
   }, [signer, initializeContracts]);
+
+  // Inicializa contratos em modo read-only para permitir que qualquer usuário
+  // (mesmo sem conectar a carteira) veja informações públicas como projetos
+  useEffect(() => {
+    try {
+      if (!CONTRACT_ADDRESSES.MULHERES_SA) return;
+      if (window && window.ethereum) {
+        const readProvider = new ethers.BrowserProvider(window.ethereum);
+        initializeContracts(readProvider);
+      } else if (ethers.getDefaultProvider) {
+        // fallback para um provider público
+        const defaultProv = ethers.getDefaultProvider();
+        initializeContracts(defaultProv);
+      }
+    } catch (err) {
+      console.error('Erro ao inicializar contratos em read-only:', err);
+    }
+  }, [initializeContracts]);
 
   // Criar projeto
   const createProject = useCallback(async (projectData) => {
