@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ConnectWallet from './ConnectWallet';
 import LogoSemFundo from "../assets/logo/logo-sa-s-fundo.png";
 import { useAuth } from '../hooks/useAuth';
+import { BiHomeAlt, BiBookmark, BiHeart, BiPlus } from "react-icons/bi";
 
 const Navbar = () => {
   const { isConnected, walletAddress, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
     logout();
@@ -114,6 +116,34 @@ const Navbar = () => {
             )}
           </div>
         </div>
+      )}
+
+      {/* Navbar Mobile com Ícones - Visível apenas na tela do Dashboard */}
+      {window.location.pathname === '/dashboard' && (
+        <nav className="fixed bottom-0 left-0 w-full bg-gray-800 shadow-lg border-t border-gray-700 md:hidden">
+          <div className="flex justify-around items-center py-2">
+            {/* Home */}
+            <button className="flex flex-col items-center text-gray-300 hover:text-white">
+              <BiHomeAlt size={24} />
+              <span className="text-xs">Home</span>
+            </button>
+            {/* Adicionar Projeto */}
+            <button className="flex flex-col items-center text-gray-300 hover:text-white">
+              <BiPlus size={24} />
+              <span className="text-xs">Adicionar</span>
+            </button>
+            {/* Doar */}
+            <button className="flex flex-col items-center text-gray-300 hover:text-white">
+              <BiHeart size={24} />
+              <span className="text-xs">Doar</span>
+            </button>
+            {/* Favoritos */}
+            <button className="flex flex-col items-center text-gray-300 hover:text-white">
+              <BiBookmark size={24} />
+              <span className="text-xs">Favoritos</span>
+            </button>
+          </div>
+        </nav>
       )}
     </nav>
   );

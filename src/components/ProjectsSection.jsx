@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useWeb3Contracts } from '../hooks/useContracts';
 import { CATEGORY_NAMES } from '../abis';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectsSection = () => {
   const {
@@ -148,20 +149,8 @@ const ProjectsSection = () => {
 };
 
 // Componente do card do projeto
-const ProjectCard = ({ project, onDonate, loading }) => {
-  const [donationAmount, setDonationAmount] = useState('');
-  const [showDonationForm, setShowDonationForm] = useState(false);
-  const { isConnected, connectWallet } = useWeb3Contracts();
-
-  const handleDonate = () => {
-    if (!donationAmount || parseFloat(donationAmount) <= 0) {
-      alert('Por favor, insira um valor válido para doação');
-      return;
-    }
-    onDonate(project.id, donationAmount);
-    setDonationAmount('');
-    setShowDonationForm(false);
-  };
+const ProjectCard = ({ project }) => {
+  const navigate = useNavigate();
 
   const daysLeft = Math.max(0, Math.ceil((new Date(project.deadline) - new Date()) / (1000 * 60 * 60 * 24)));
   const progress = (parseFloat(project.raised) / parseFloat(project.target)) * 100;
@@ -177,29 +166,29 @@ const ProjectCard = ({ project, onDonate, loading }) => {
   };
 
   return (
-  <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300" style={{ minHeight: '420px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-3">
-          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${categoryColors[project.category] || 'bg-gray-100 text-gray-800'}`}>
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300" style={{ minHeight: '260px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div className="p-3">
+        <div className="flex items-center justify-between mb-1">
+          <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${categoryColors[project.category] || 'bg-gray-100 text-gray-800'}`}>
             {CATEGORY_NAMES[project.category]}
           </span>
-          <span className={`text-sm font-medium ${daysLeft > 7 ? 'text-green-600' : daysLeft > 0 ? 'text-orange-600' : 'text-red-600'}`}>
+          <span className={`text-xs font-medium ${daysLeft > 7 ? 'text-green-600' : daysLeft > 0 ? 'text-orange-600' : 'text-red-600'}`}>
             {daysLeft > 0 ? `${daysLeft} dias restantes` : 'Expirado'}
           </span>
         </div>
 
-        <h3 className="text-xl font-bold text-gray-900 mb-2">{project.name}</h3>
-  <p className="text-gray-600 text-sm mb-4 line-clamp-3" style={{display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden'}}>{project.description}</p>
+        <h3 className="text-base font-bold text-gray-900 mb-1">{project.name}</h3>
+        <p className="text-gray-600 text-xs mb-2 line-clamp-2" style={{display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden'}}>{project.description}</p>
 
         {/* Progresso */}
-        <div className="mb-4">
-          <div className="flex justify-between text-sm text-gray-600 mb-1">
+        <div className="mb-2">
+          <div className="flex justify-between text-xs text-gray-600 mb-1">
             <span>{parseFloat(project.raised).toFixed(4)} ETH</span>
             <span>{parseFloat(project.target).toFixed(4)} ETH</span>
           </div>
-          <div className="bg-gray-200 rounded-full h-2">
+          <div className="bg-gray-200 rounded-full h-1.5">
             <div
-              className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 h-1.5 rounded-full transition-all duration-300"
               style={{ width: `${Math.min(progress, 100)}%` }}
             ></div>
           </div>
@@ -211,58 +200,13 @@ const ProjectCard = ({ project, onDonate, loading }) => {
       </div>
 
       {/* Footer com ação */}
-      <div className="px-6 pb-6">
-        {!showDonationForm ? (
-          isConnected ? (
-            <button
-              onClick={() => setShowDonationForm(true)}
-              disabled={daysLeft === 0}
-              className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 ${daysLeft === 0
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700'
-                }`}
-            >
-              {daysLeft === 0 ? '❌ Projeto Expirado' : '💝 Apoiar Projeto'}
-            </button>
-          ) : (
-            <button
-              className="w-full py-3 px-4 rounded-lg font-semibold bg-blue-600 text-white cursor-default opacity-70"
-              disabled
-            >
-              Conectar carteira para doar
-            </button>
-          )
-        ) : (
-          <div className="space-y-3">
-            <input
-              type="number"
-              step="0.001"
-              min="0.001"
-              placeholder="Valor em ETH (mín: 0.001)"
-              value={donationAmount}
-              onChange={(e) => setDonationAmount(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-            />
-            <div className="flex space-x-2">
-              <button
-                onClick={handleDonate}
-                disabled={loading || !donationAmount}
-                className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors disabled:opacity-50"
-              >
-                {loading ? 'Doando...' : 'Confirmar'}
-              </button>
-              <button
-                onClick={() => {
-                  setShowDonationForm(false);
-                  setDonationAmount('');
-                }}
-                className="flex-1 bg-gray-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-gray-600 transition-colors"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        )}
+      <div className="px-3 pb-3">
+        <button
+          className="w-full py-1.5 px-2 rounded-lg font-semibold text-sm bg-blue-600 text-white hover:bg-blue-700"
+          onClick={() => navigate('/dashboard')}
+        >
+          Conectar carteira para doar
+        </button>
       </div>
     </div>
   );
