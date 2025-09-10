@@ -1,5 +1,8 @@
 {
   "name": "mulheressa",
   "compatibility_date": "2025-09-08",
-  "pages_build_output_dir": "./dist"
+  "assets": {
+    "directory": "./dist"
+  },
+  "pages_build_output_dir": "./dist",
 }
