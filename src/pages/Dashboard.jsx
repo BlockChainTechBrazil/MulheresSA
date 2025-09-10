@@ -115,7 +115,7 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                {/* Botão de doar */}
+                {/* Botão de gerenciar projeto */}
                 <button 
                   className={`w-full py-2 px-4 rounded-lg font-semibold transition-colors ${
                     project.status === 'ativo'
@@ -125,11 +125,11 @@ export default function Dashboard() {
                   disabled={project.status !== 'ativo'}
                   onClick={() => {
                     if (project.status === 'ativo') {
-                      alert(`Redirecionando para doar ao ${project.name}`);
+                      alert(`Gerenciando ${project.name}`);
                     }
                   }}
                 >
-                  {project.status === 'ativo' ? 'Doar Agora' : 'Projeto Pausado'}
+                  {project.status === 'ativo' ? 'Projeto em Andamento' : 'Projeto Pausado'}
                 </button>
               </div>
             ))}
