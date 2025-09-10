@@ -8,4 +8,13 @@ export default defineConfig({
   plugins: [react(),
      tailwindcss(),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
+  },
+  // Garantir que arquivos estáticos sejam copiados
+  publicDir: 'public'
 })
