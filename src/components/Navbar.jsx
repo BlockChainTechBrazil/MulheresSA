@@ -38,26 +38,12 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-4">
-            {isConnected && (
-              <>
-                <Link
-                  to="/dashboard"
-                  className="px-3 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm transition-colors"
-                >
-                  Dashboard
-                </Link>
-                <div className="px-3 py-2 bg-green-600 rounded text-sm cursor-default">
-                  {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
-                </div>
-                <button
-                  onClick={handleSignOut}
-                  className="px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-sm transition-colors"
-                >
-                  Sign Out
-                </button>
-              </>
-            )}
-            {!isConnected && <ConnectWallet buttonStyle="px-4 py-2 text-sm" />}
+            <Link
+              to="/login"
+              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded text-sm transition-colors font-semibold"
+            >
+              Entrar
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -87,51 +73,36 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 bg-blue-900">
-            {isConnected ? (
-              <>
-                <Link
-                  to="/dashboard"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700 transition-colors"
-                >
-                  Dashboard
-                </Link>
-                <div className="px-3 py-2 text-base font-medium text-white">
-                  <span className="block text-sm text-blue-200">Carteira Conectada:</span>
-                  <span className="bg-green-600 px-2 py-1 rounded text-sm inline-block mt-1">
-                    {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
-                  </span>
-                </div>
-                <button
-                  onClick={handleSignOut}
-                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white bg-red-600 hover:bg-red-700 transition-colors"
-                >
-                  Sign Out
-                </button>
-              </>
-            ) : (
-              <div className="px-3 py-2">
-                <ConnectWallet buttonStyle="w-full text-center px-4 py-2 text-base bg-blue-600 hover:bg-blue-700 rounded" />
-              </div>
-            )}
+            <Link
+              to="/login"
+              onClick={() => setIsMenuOpen(false)}
+              className="block px-3 py-2 rounded-md text-base font-medium text-white bg-purple-600 hover:bg-purple-700 transition-colors text-center"
+            >
+              Entrar
+            </Link>
           </div>
         </div>
       )}
 
-      {/* Navbar Mobile com Ícones - Visível apenas na tela do Dashboard */}
-      {window.location.pathname === '/dashboard' && (
+      {/* Navbar Mobile com Ícones - Visível apenas nas telas de Dashboard */}
+      {(window.location.pathname === '/dashboard' || window.location.pathname === '/client-dashboard') && (
         <nav className="fixed bottom-0 left-0 w-full bg-gray-800 shadow-lg border-t border-gray-700 md:hidden">
           <div className="flex justify-around items-center py-2">
             {/* Home */}
-            <button className="flex flex-col items-center text-gray-300 hover:text-white">
+            <button 
+              onClick={() => navigate('/')}
+              className="flex flex-col items-center text-gray-300 hover:text-white"
+            >
               <BiHomeAlt size={24} />
               <span className="text-xs">Home</span>
             </button>
-            {/* Adicionar Projeto */}
-            <button className="flex flex-col items-center text-gray-300 hover:text-white">
-              <BiPlus size={24} />
-              <span className="text-xs">Adicionar</span>
-            </button>
+            {/* Adicionar Projeto - apenas para dashboard admin */}
+            {window.location.pathname === '/dashboard' && (
+              <button className="flex flex-col items-center text-gray-300 hover:text-white">
+                <BiPlus size={24} />
+                <span className="text-xs">Adicionar</span>
+              </button>
+            )}
             {/* Doar */}
             <button className="flex flex-col items-center text-gray-300 hover:text-white">
               <BiHeart size={24} />
