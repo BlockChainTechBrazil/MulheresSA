@@ -73,6 +73,30 @@ const ProjectsSection = () => {
     }
   };
 
+  // Dados estáticos para os projetos
+  const staticProjects = [
+    {
+      id: 1,
+      category: 2,
+      name: "Arrecadação de Fundos",
+      description: "Mulheres artesas",
+      raised: "0.0110",
+      target: "0.2000",
+      donors: 1,
+      deadline: "2026-02-11"
+    },
+    {
+      id: 2,
+      category: 0,
+      name: "Capacitação profissional para mulheres",
+      description: "Vai ser muito bom",
+      raised: "0.0510",
+      target: "999.9990",
+      donors: 3,
+      deadline: "2025-10-01"
+    }
+  ];
+
   if (!contracts.mulheresSA) {
     return (
       <div className="bg-gray-50 py-16">
@@ -104,45 +128,14 @@ const ProjectsSection = () => {
           <p className="text-xl text-gray-600 mb-8">
             Apoie projetos que empoderam mulheres brasileiras e receba NFTs únicos
           </p>
-
-          {/* Estatísticas */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-lg mx-auto">
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <div className="text-3xl font-bold text-purple-600">{stats.totalProjects}</div>
-              <div className="text-gray-600">Total de Projetos</div>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <div className="text-3xl font-bold text-green-600">{parseFloat(stats.totalRaised).toFixed(4)} ETH</div>
-              <div className="text-gray-600">Total Arrecadado</div>
-            </div>
-          </div>
         </div>
 
         {/* Projetos */}
-        {loading ? (
-          <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
-            <p className="mt-4 text-gray-600">Carregando projetos...</p>
-          </div>
-        ) : projects.length === 0 ? (
-          <div className="text-center py-12">
-            <div className="bg-white rounded-lg p-8 shadow-md max-w-md mx-auto">
-              <p className="text-xl text-gray-600 mb-2">Nenhum projeto ativo encontrado</p>
-              <p className="text-gray-500">Novos projetos aparecerão aqui em breve</p>
-            </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                onDonate={handleDonate}
-                loading={contractLoading}
-              />
-            ))}
-          </div>
-        )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {staticProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
       </div>
     </div>
   );
