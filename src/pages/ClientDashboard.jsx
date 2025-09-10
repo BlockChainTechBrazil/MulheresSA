@@ -65,23 +65,6 @@ export default function ClientDashboard() {
                 
                 <p className="text-sm text-gray-600 mb-4">{project.description}</p>
                 
-                {/* Informações financeiras */}
-                <div className="mb-4">
-                  <div className="flex justify-between text-sm text-gray-600 mb-2">
-                    <span>Arrecadado: {project.raised} ETH</span>
-                    <span>Meta: {project.target} ETH</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full"
-                      style={{ width: `${Math.min(100, (parseFloat(project.raised) / parseFloat(project.target)) * 100)}%` }}
-                    ></div>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    {((parseFloat(project.raised) / parseFloat(project.target)) * 100).toFixed(1)}% da meta
-                  </div>
-                </div>
-
                 {/* Botão de doar */}
                 <button 
                   className={`w-full py-2 px-4 rounded-lg font-semibold transition-colors ${
