@@ -7,7 +7,7 @@ import Parceiro3 from "../assets/img/parceiros/parceiro3.png";
 import Parceiro4 from "../assets/img/parceiros/parceiro4.png";
 import Parceiro5 from "../assets/img/parceiros/parceiro5.png";
 import BTB from "../assets/img/parceiros/btb.png";
-import Bank from "./Bank";
+// ...existing code...
 
 const partnersData = [
     { name: "BTB", image: BTB },

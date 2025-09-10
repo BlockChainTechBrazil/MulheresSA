@@ -8,7 +8,6 @@ const PartnersSection = ({ partners }) => {
         {partners.map((partner, index) => (
           <div key={index} className="text-center">
             <img src={partner.image} alt={partner.name} className="mx-auto mb-4 w-32 h-32 object-contain" />
-            <p className="text-sm font-semibold">{partner.name}</p>
           </div>
         ))}
       </div>

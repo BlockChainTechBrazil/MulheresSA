@@ -177,7 +177,7 @@ const ProjectCard = ({ project, onDonate, loading }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+  <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300" style={{ minHeight: '420px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <div className="p-6">
         <div className="flex items-center justify-between mb-3">
           <span className={`px-3 py-1 rounded-full text-xs font-semibold ${categoryColors[project.category] || 'bg-gray-100 text-gray-800'}`}>
@@ -189,7 +189,7 @@ const ProjectCard = ({ project, onDonate, loading }) => {
         </div>
 
         <h3 className="text-xl font-bold text-gray-900 mb-2">{project.name}</h3>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3">{project.description}</p>
+  <p className="text-gray-600 text-sm mb-4 line-clamp-3" style={{display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden'}}>{project.description}</p>
 
         {/* Progresso */}
         <div className="mb-4">
@@ -226,17 +226,8 @@ const ProjectCard = ({ project, onDonate, loading }) => {
             </button>
           ) : (
             <button
-              onClick={async () => {
-                try {
-                  await connectWallet();
-                  // após conectar, abrir o formulário para doar
-                  setShowDonationForm(true);
-                } catch (err) {
-                  console.error('Erro ao conectar carteira:', err);
-                  alert('Erro ao conectar carteira: ' + err.message);
-                }
-              }}
-              className="w-full py-3 px-4 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700"
+              className="w-full py-3 px-4 rounded-lg font-semibold bg-blue-600 text-white cursor-default opacity-70"
+              disabled
             >
               Conectar carteira para doar
             </button>

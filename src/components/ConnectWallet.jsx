@@ -20,51 +20,21 @@ const walletIcon = (
 
 const ConnectWallet = ({ buttonStyle = "px-5 py-2" }) => {
   const navigate = useNavigate();
-  const { isConnected, walletAddress, login, logout } = useAuth();
 
-  const handleConnect = async () => {
-    if (window.ethereum) {
-      try {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const accounts = await provider.send("eth_requestAccounts", []);
-        login(accounts[0]);
-        navigate('/dashboard');
-      } catch (err) {
-        alert("Erro ao conectar carteira: " + (err && err.message ? err.message : err));
-      }
-    } else {
-      alert("MetaMask não encontrada. Instale a extensão para continuar.");
-    }
-  };
-
-  const handleDisconnect = () => {
-    logout();
-    navigate('/');
+  const handleRedirect = () => {
+    navigate('/dashboard');
   };
 
   return (
     <div>
-      {!isConnected ? (
-        <button
-          className={`flex items-center gap-2 ${buttonStyle} rounded-full font-semibold shadow-lg transition-all duration-200 border-2 border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 bg-[#F9C448] text-white hover:scale-105 hover:shadow-xl`}
-          onClick={handleConnect}
-          style={{ minWidth: 120 }}
-        >
-          {walletIcon}
-          <span>Conectar</span>
-        </button>
-      ) : (
-        <button
-          className={`flex items-center gap-2 ${buttonStyle} rounded-full font-semibold shadow-lg transition-all duration-200 border-2 border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 bg-gradient-to-r from-green-500 to-green-700 text-white cursor-pointer hover:from-green-600 hover:to-green-800`}
-          onClick={handleDisconnect}
-          style={{ minWidth: 120 }}
-        >
-          {walletIcon}
-          <span className="truncate">
-            {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
-          </span>
-        </button>
-      )}
+      <button
+        className={`flex items-center gap-2 ${buttonStyle} rounded-full font-semibold shadow-lg transition-all duration-200 border-2 border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 bg-[#F9C448] text-white hover:scale-105 hover:shadow-xl`}
+        onClick={handleRedirect}
+        style={{ minWidth: 120 }}
+      >
+        {walletIcon}
+        <span>Conectar</span>
+      </button>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import Section from '../components/Hero';
 import Goals from '../components/Goals';
-import Bank from '../components/Bank';
+// ...existing code...
 import PartnersSection from '../components/PartnersSection';
 import ProjectsSection from '../components/ProjectsSection';
 import HighlightSection from '../components/HighlightSection';
@@ -42,7 +42,7 @@ export default function Home() {
       />
       <ProjectsSection />
       <PartnersSection partners={partnersData}></PartnersSection>
-      <Bank />
+  {/* Componente Bank removido */}
     </>
   );
 }
