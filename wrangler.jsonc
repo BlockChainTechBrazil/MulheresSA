@@ -5,4 +5,10 @@
     "directory": "./dist"
   },
   "pages_build_output_dir": "./dist",
+  "routes": [
+    {
+      "pattern": "/*",
+      "custom_file": "index.html"
+    }
+  ]
 }
