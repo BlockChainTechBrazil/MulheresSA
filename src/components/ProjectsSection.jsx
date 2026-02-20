@@ -102,10 +102,10 @@ const ProjectsSection = () => {
       <div className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Projetos Fantoken MSA
+            Projetos
           </h2>
           <p className="text-lg text-gray-600 mb-8">
-            Conecte sua carteira para ver e apoiar projetos que empoderam mulheres brasileiras
+            Conecte sua carteira para ver e apoiar projetos que empoderam mulheres brasileiras e ganhar Fan Tokens
           </p>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 max-w-md mx-auto">
             <p className="text-blue-800">
@@ -123,10 +123,10 @@ const ProjectsSection = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Projetos Fantoken MSA
+            Projetos
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Apoie projetos que empoderam mulheres brasileiras e receba NFTs únicos
+            Invista e ganhe Fan Tokens
           </p>
         </div>
 
