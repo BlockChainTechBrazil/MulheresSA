@@ -22,7 +22,7 @@ const ProjectsSection = () => {
   // Carregar dados
   useEffect(() => {
     const loadData = async () => {
-      if (!contracts.mulheresSA) return;
+      if (!contracts.b2black) return;
 
       setLoading(true);
       try {
@@ -55,7 +55,7 @@ const ProjectsSection = () => {
     };
 
     loadData();
-  }, [contracts.mulheresSA, getPlatformStats, getProject]);
+  }, [contracts.b2black, getPlatformStats, getProject]);
 
   // Fazer doação
   const handleDonate = async (projectId, amount) => {
@@ -97,12 +97,12 @@ const ProjectsSection = () => {
     }
   ];
 
-  if (!contracts.mulheresSA) {
+  if (!contracts.b2black) {
     return (
       <div className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Projetos Mulheres SA
+            Projetos Fantoken MSA
           </h2>
           <p className="text-lg text-gray-600 mb-8">
             Conecte sua carteira para ver e apoiar projetos que empoderam mulheres brasileiras
@@ -123,7 +123,7 @@ const ProjectsSection = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Projetos Mulheres SA
+            Projetos Fantoken MSA
           </h2>
           <p className="text-xl text-gray-600 mb-8">
             Apoie projetos que empoderam mulheres brasileiras e receba NFTs únicos
@@ -171,7 +171,7 @@ const ProjectCard = ({ project }) => {
         </div>
 
         <h3 className="text-base font-bold text-gray-900 mb-1">{project.name}</h3>
-        <p className="text-gray-600 text-xs mb-2 line-clamp-2" style={{display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden'}}>{project.description}</p>
+        <p className="text-gray-600 text-xs mb-2 line-clamp-2" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{project.description}</p>
 
         {/* Progresso */}
         <div className="mb-2">

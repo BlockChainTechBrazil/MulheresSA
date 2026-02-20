@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { BiHomeAlt, BiBookmark, BiCog, BiFolder } from "react-icons/bi";
 
 export default function Dashboard() {
   // Dados estáticos para exibição web2
@@ -45,7 +44,7 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">Dashboard MulheresSA</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">Dashboard B2Black</h1>
           <p className="text-gray-600 text-center">Bem-vinda ao painel de controle da plataforma de doações</p>
         </div>
 
@@ -83,11 +82,10 @@ export default function Dashboard() {
                 <div className="mb-3">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="text-lg font-bold text-gray-800">{project.name}</h3>
-                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                      project.status === 'ativo' 
-                        ? 'bg-green-100 text-green-800' 
+                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${project.status === 'ativo'
+                        ? 'bg-green-100 text-green-800'
                         : 'bg-yellow-100 text-yellow-800'
-                    }`}>
+                      }`}>
                       {project.status === 'ativo' ? '🟢 Ativo' : '⏸️ Pausado'}
                     </span>
                   </div>
@@ -95,9 +93,9 @@ export default function Dashboard() {
                     {project.category}
                   </span>
                 </div>
-                
+
                 <p className="text-sm text-gray-600 mb-4">{project.description}</p>
-                
+
                 {/* Informações financeiras */}
                 <div className="mb-4">
                   <div className="flex justify-between text-sm text-gray-600 mb-2">
@@ -116,12 +114,11 @@ export default function Dashboard() {
                 </div>
 
                 {/* Botão de gerenciar projeto */}
-                <button 
-                  className={`w-full py-2 px-4 rounded-lg font-semibold transition-colors ${
-                    project.status === 'ativo'
+                <button
+                  className={`w-full py-2 px-4 rounded-lg font-semibold transition-colors ${project.status === 'ativo'
                       ? 'bg-blue-600 hover:bg-blue-700 text-white'
                       : 'bg-gray-400 text-gray-200 cursor-not-allowed'
-                  }`}
+                    }`}
                   disabled={project.status !== 'ativo'}
                   onClick={() => {
                     if (project.status === 'ativo') {

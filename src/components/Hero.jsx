@@ -1,23 +1,13 @@
-import FantokenHero from "/fantoken.png";
-import MulherHero from "/mulher.png";
+import LogoOriginal from "/logo-original.png";
 
 const Section = () => {
   return (
     <section className="text-center">
-      <div className="relative w-full overflow-hidden h-56 sm:h-80 md:h-96 lg:h-[900px]">
-        {/* background faded image */}
+      <div className="relative w-full overflow-hidden h-64 sm:h-72 md:h-80 lg:h-96 flex items-center justify-center bg-white">
         <img
-          src={MulherHero}
-          alt="Hero Mulher"
-          className="w-full h-full object-cover opacity-40"
-          aria-hidden
-        />
-
-        {/* foreground Fantoken - made more prominent */}
-        <img
-          src={FantokenHero}
-          alt="Hero Fantoken"
-          className="w-full h-full absolute inset-0 z-20 object-cover opacity-100 filter saturate-125 drop-shadow-xl pointer-events-none"
+          src={LogoOriginal}
+          alt="Logo B2Black"
+          className="max-w-lg sm:max-w-xl md:max-w-2xl max-h-full object-contain p-4"
         />
       </div>
     </section>

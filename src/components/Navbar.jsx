@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import ConnectWallet from './ConnectWallet';
-import LogoSemFundo from "../assets/logo/logo-sa-s-fundo.png";
+import LogoOriginal from "/logo-original.png";
 import { useAuth } from '../hooks/useAuth';
 import { BiHomeAlt, BiBookmark, BiHeart, BiPlus } from "react-icons/bi";
 
@@ -26,13 +25,13 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
             <div className="bg-white p-1 rounded flex-shrink-0">
-              <img src={LogoSemFundo} alt="Logo" className="h-8 w-auto" />
+              <img src={LogoOriginal} alt="Logo" className="h-8 w-auto" />
             </div>
             <div className="ml-3 hidden sm:block">
               <span className="text-xl font-bold">Fantoken MSA</span>
             </div>
             <div className="ml-3 sm:hidden">
-              <span className="text-lg font-bold">MSA</span>
+              <span className="text-xl font-bold">Fantoken MSA</span>
             </div>
           </Link>
 
@@ -89,7 +88,7 @@ const Navbar = () => {
         <nav className="fixed bottom-0 left-0 w-full bg-gray-800 shadow-lg border-t border-gray-700 md:hidden">
           <div className="flex justify-around items-center py-2">
             {/* Home */}
-            <button 
+            <button
               onClick={() => navigate('/')}
               className="flex flex-col items-center text-gray-300 hover:text-white"
             >

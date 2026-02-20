@@ -37,12 +37,12 @@ export default function Home() {
         image={'/mulheres.jpg'}
         alt="Mulheres em ambiente de tecnologia"
         title="Apoio às Mulheres Artesãs"
-        text="O projeto MulheresSA vai transformar a vida de artesãs brasileiras, oferecendo acesso a recursos, capacitação e oportunidades de mercado. Com sua doação, você contribui diretamente para o empoderamento econômico dessas mulheres, promovendo inclusão, geração de renda e valorização da cultura local."
+        text="O projeto Fantoken MSA vai transformar a vida de artesãs brasileiras, oferecendo acesso a recursos, capacitação e oportunidades de mercado. Com sua doação, você contribui diretamente para o empoderamento econômico dessas mulheres, promovendo inclusão, geração de renda e valorização da cultura local."
         reverse
       />
       <ProjectsSection />
       <PartnersSection partners={partnersData}></PartnersSection>
-  {/* Componente Bank removido */}
+      {/* Componente Bank removido */}
     </>
   );
 }

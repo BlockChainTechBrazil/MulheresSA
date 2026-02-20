@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 
 // ABIs básicos - você precisará copiar os ABIs após compilar no Remix
-const MulheresSAabi = []; // Cole aqui o ABI do MulheresSA.sol
+const B2BlackAbi = []; // Cole aqui o ABI do B2Black.sol
 const FanTokenMSAabi = []; // Cole aqui o ABI do FanTokenMSA.sol  
 const ProxyManagerabi = []; // Cole aqui o ABI do ProxyManager.sol
 
@@ -18,7 +18,7 @@ export const useWeb3 = () => {
   // Endereços dos contratos (atualize após deploy no Remix)
   const CONTRACT_ADDRESSES = {
     PROXY_MANAGER: '', // Cole aqui o endereço do ProxyManager após deploy
-    MULHERES_SA: '',   // Cole aqui o endereço do MulheresSA após deploy
+    B2BLACK: '',   // Cole aqui o endereço do B2Black após deploy
     FAN_TOKEN: ''      // Cole aqui o endereço do FanToken após deploy
   };
 
@@ -66,9 +66,9 @@ export const useWeb3 = () => {
       }
 
       if (CONTRACT_ADDRESSES.MULHERES_SA) {
-        contractInstances.mulheresSA = new ethers.Contract(
-          CONTRACT_ADDRESSES.MULHERES_SA,
-          MulheresSAabi,
+        contractInstances.b2black = new ethers.Contract(
+          CONTRACT_ADDRESSES.B2BLACK,
+          B2BlackAbi,
           signer
         );
       }

@@ -15,7 +15,7 @@ export default function Login() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">MulheresSA</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">B2Black</h1>
           <p className="text-gray-600">Escolha como deseja acessar a plataforma</p>
         </div>
 

@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ethers } from 'ethers';
-import { MULHERES_SA_ABI, MULHERES_SA_ADDRESS } from '../abis';
 
 // Endereços dos contratos (atualizado com contrato deployed)
 const CONTRACT_ADDRESSES = {
-  MULHERES_SA: MULHERES_SA_ADDRESS, // Contrato deployado
+  MULHERES_SA: B2BLACK_ADDRESS, // Contrato deployado
 };
 
 export const useWeb3Contracts = () => {
@@ -21,14 +20,14 @@ export const useWeb3Contracts = () => {
   const initializeContracts = useCallback((connection) => {
     try {
       if (!CONTRACT_ADDRESSES.MULHERES_SA) return;
-      const mulheresSAContract = new ethers.Contract(
+      const b2blackContract = new ethers.Contract(
         CONTRACT_ADDRESSES.MULHERES_SA,
-        MULHERES_SA_ABI,
+        B2BLACK_ABI,
         connection
       );
 
       setContracts({
-        mulheresSA: mulheresSAContract
+        b2black: b2blackContract
       });
     } catch (err) {
       console.error('Erro ao inicializar contratos:', err);
@@ -73,7 +72,7 @@ export const useWeb3Contracts = () => {
 
   // Definir endereços dos contratos (chamado após deploy)
   const setContractAddresses = useCallback((addresses) => {
-    CONTRACT_ADDRESSES.MULHERES_SA = addresses.mulheresSA;
+    CONTRACT_ADDRESSES.MULHERES_SA = addresses.b2black;
 
     if (signer) {
       initializeContracts(signer);
@@ -101,10 +100,10 @@ export const useWeb3Contracts = () => {
   // Criar projeto
   const createProject = useCallback(async (projectData) => {
     try {
-      if (!contracts.mulheresSA) throw new Error('Contrato não inicializado');
+      if (!contracts.b2black) throw new Error('Contrato não inicializado');
 
       setLoading(true);
-      const tx = await contracts.mulheresSA.createProject(
+      const tx = await contracts.b2black.createProject(
         projectData.name,
         projectData.description,
         projectData.category,
@@ -120,15 +119,15 @@ export const useWeb3Contracts = () => {
     } finally {
       setLoading(false);
     }
-  }, [contracts.mulheresSA]);
+  }, [contracts.b2black]);
 
   // Fazer doação
   const donateToProject = useCallback(async (projectId, amount) => {
     try {
-      if (!contracts.mulheresSA) throw new Error('Contrato não inicializado');
+      if (!contracts.b2black) throw new Error('Contrato não inicializado');
 
       setLoading(true);
-      const tx = await contracts.mulheresSA.donate(
+      const tx = await contracts.b2black.donate(
         projectId,
         { value: ethers.parseEther(amount.toString()) }
       );
@@ -141,14 +140,14 @@ export const useWeb3Contracts = () => {
     } finally {
       setLoading(false);
     }
-  }, [contracts.mulheresSA]);
+  }, [contracts.b2black]);
 
   // Obter projeto
   const getProject = useCallback(async (projectId) => {
     try {
-      if (!contracts.mulheresSA) throw new Error('Contrato não inicializado');
+      if (!contracts.b2black) throw new Error('Contrato não inicializado');
 
-      const project = await contracts.mulheresSA.getProject(projectId);
+      const project = await contracts.b2black.getProject(projectId);
       return {
         org: project[0],
         name: project[1],
@@ -164,15 +163,15 @@ export const useWeb3Contracts = () => {
       console.error('Erro ao obter projeto:', err);
       throw err;
     }
-  }, [contracts.mulheresSA]);
+  }, [contracts.b2black]);
 
   // Obter estatísticas da plataforma
   const getPlatformStats = useCallback(async () => {
     try {
-      if (!contracts.mulheresSA) throw new Error('Contrato não inicializado');
+      if (!contracts.b2black) throw new Error('Contrato não inicializado');
 
-      const totalProjects = await contracts.mulheresSA.projectCount();
-      const totalRaised = await contracts.mulheresSA.totalRaised();
+      const totalProjects = await contracts.b2black.projectCount();
+      const totalRaised = await contracts.b2black.totalRaised();
 
       return {
         totalProjects: Number(totalProjects),
@@ -182,28 +181,28 @@ export const useWeb3Contracts = () => {
       console.error('Erro ao obter estatísticas:', err);
       throw err;
     }
-  }, [contracts.mulheresSA]);
+  }, [contracts.b2black]);
 
   // Obter projetos do usuário
   const getUserProjects = useCallback(async (address) => {
     try {
-      if (!contracts.mulheresSA) throw new Error('Contrato não inicializado');
+      if (!contracts.b2black) throw new Error('Contrato não inicializado');
 
-      const projectIds = await contracts.mulheresSA.getUserProjects(address);
+      const projectIds = await contracts.b2black.getUserProjects(address);
       return projectIds.map(id => Number(id));
     } catch (err) {
       console.error('Erro ao obter projetos do usuário:', err);
       throw err;
     }
-  }, [contracts.mulheresSA]);
+  }, [contracts.b2black]);
 
   // Sacar fundos de projeto
   const withdrawFromProject = useCallback(async (projectId, amount) => {
     try {
-      if (!contracts.mulheresSA) throw new Error('Contrato não inicializado');
+      if (!contracts.b2black) throw new Error('Contrato não inicializado');
 
       setLoading(true);
-      const tx = await contracts.mulheresSA.withdraw(
+      const tx = await contracts.b2black.withdraw(
         projectId,
         ethers.parseEther(amount.toString())
       );
@@ -216,7 +215,7 @@ export const useWeb3Contracts = () => {
     } finally {
       setLoading(false);
     }
-  }, [contracts.mulheresSA]);
+  }, [contracts.b2black]);
 
   // Verificar mudanças na conta
   useEffect(() => {
