@@ -7,7 +7,7 @@ const Section = () => {
         <img
           src={LogoOriginal}
           alt="Logo B2Black"
-          className="max-w-lg sm:max-w-xl md:max-w-2xl max-h-full object-contain p-4"
+          className="max-w-full sm:max-w-xl md:max-w-2xl max-h-full object-contain p-4 px-6 sm:px-4"
         />
       </div>
     </section>
