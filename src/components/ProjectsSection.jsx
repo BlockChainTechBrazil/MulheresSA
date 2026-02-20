@@ -22,7 +22,7 @@ const ProjectsSection = () => {
   // Carregar dados
   useEffect(() => {
     const loadData = async () => {
-      if (!contracts.b2black) return;
+      if (!contracts.mulheresSA) return;
 
       setLoading(true);
       try {
@@ -55,7 +55,7 @@ const ProjectsSection = () => {
     };
 
     loadData();
-  }, [contracts.b2black, getPlatformStats, getProject]);
+  }, [contracts.mulheresSA, getPlatformStats, getProject]);
 
   // Fazer doação
   const handleDonate = async (projectId, amount) => {
@@ -97,7 +97,7 @@ const ProjectsSection = () => {
     }
   ];
 
-  if (!contracts.b2black) {
+  if (!contracts.mulheresSA) {
     return (
       <div className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

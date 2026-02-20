@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ethers } from 'ethers';
+import { MULHERES_SA_ABI, MULHERES_SA_ADDRESS } from '../abis';
 
 // Endereços dos contratos (atualizado com contrato deployed)
 const CONTRACT_ADDRESSES = {
