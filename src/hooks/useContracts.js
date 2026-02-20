@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 
 // Endereços dos contratos (atualizado com contrato deployed)
 const CONTRACT_ADDRESSES = {
-  MULHERES_SA: B2BLACK_ADDRESS, // Contrato deployado
+  MULHERES_SA: MULHERES_SA_ADDRESS, // Contrato deployado
 };
 
 export const useWeb3Contracts = () => {
@@ -20,14 +20,14 @@ export const useWeb3Contracts = () => {
   const initializeContracts = useCallback((connection) => {
     try {
       if (!CONTRACT_ADDRESSES.MULHERES_SA) return;
-      const b2blackContract = new ethers.Contract(
+      const mulheresSAContract = new ethers.Contract(
         CONTRACT_ADDRESSES.MULHERES_SA,
-        B2BLACK_ABI,
+        MULHERES_SA_ABI,
         connection
       );
 
       setContracts({
-        b2black: b2blackContract
+        mulheresSA: mulheresSAContract
       });
     } catch (err) {
       console.error('Erro ao inicializar contratos:', err);

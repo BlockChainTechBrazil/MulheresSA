@@ -1,7 +1,7 @@
-// B2Black Contract ABI and Address
-export const B2BLACK_ADDRESS = "0xD527bC32cea6da262BBf78E53384ccE4806C3CD1";
+// MulheresSA Contract ABI and Address
+export const MULHERES_SA_ADDRESS = "0xD527bC32cea6da262BBf78E53384ccE4806C3CD1";
 
-export const B2BLACK_ABI = [
+export const MULHERES_SA_ABI = [
   {
     "inputs": [],
     "stateMutability": "nonpayable",
