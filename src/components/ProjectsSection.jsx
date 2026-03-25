@@ -57,19 +57,19 @@ const ProjectsSection = () => {
     loadData();
   }, [contracts.mulheresSA, getPlatformStats, getProject]);
 
-  // Fazer doação
+  // Fazer apoio
   const handleDonate = async (projectId, amount) => {
     try {
       await donateToProject(projectId, amount);
-      // Recarregar dados após doação
+      // Recarregar dados após apoio
       const updatedProject = await getProject(projectId);
       setProjects(prev => prev.map(p =>
         p.id === projectId ? { ...updatedProject, id: projectId } : p
       ));
-      alert('Doação realizada com sucesso! Você recebeu um NFT!');
+      alert('Apoio realizado com sucesso! Você recebeu um NFT!');
     } catch (error) {
-      console.error('Erro ao fazer doação:', error);
-      alert('Erro ao fazer doação: ' + error.message);
+      console.error('Erro ao fazer apoio:', error);
+      alert('Erro ao fazer apoio: ' + error.message);
     }
   };
 
@@ -195,10 +195,10 @@ const ProjectCard = ({ project }) => {
       {/* Footer com ação */}
       <div className="px-3 pb-3">
         <button
-          className="w-full py-1.5 px-2 rounded-lg font-semibold text-sm bg-blue-600 text-white hover:bg-blue-700"
+          className="w-full py-1.5 px-2 rounded-lg font-semibold text-sm bg-purple-600 text-white hover:bg-purple-700"
           onClick={() => navigate('/dashboard')}
         >
-          Conectar carteira para doar
+          Apoiar Agora
         </button>
       </div>
     </div>

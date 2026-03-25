@@ -15,10 +15,10 @@ const FanTokenSection = () => {
 
   // Definições dos tiers
   const tiers = [
-    { name: 'Bronze', color: 'from-yellow-600 to-yellow-800', icon: '🥉', min: '1 doação' },
-    { name: 'Silver', color: 'from-gray-400 to-gray-600', icon: '🥈', min: '5 doações' },
-    { name: 'Gold', color: 'from-yellow-400 to-yellow-600', icon: '🥇', min: '10 doações' },
-    { name: 'Diamond', color: 'from-blue-400 to-purple-600', icon: '💎', min: '25 doações' }
+    { name: 'Bronze', color: 'from-yellow-600 to-yellow-800', icon: '🥉', min: '1 apoio' },
+    { name: 'Silver', color: 'from-gray-400 to-gray-600', icon: '🥈', min: '5 apoios' },
+    { name: 'Gold', color: 'from-yellow-400 to-yellow-600', icon: '🥇', min: '10 apoios' },
+    { name: 'Diamond', color: 'from-blue-400 to-purple-600', icon: '💎', min: '25 apoios' }
   ];
 
   // Carregar informações dos tokens do usuário
@@ -117,11 +117,11 @@ const FanTokenSection = () => {
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-blue-600">{userStats.donationCount}</div>
-            <div className="text-gray-600">Doações</div>
+            <div className="text-gray-600">Apoios</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-green-600">{userStats.totalDonated}</div>
-            <div className="text-gray-600">ETH Doado</div>
+            <div className="text-gray-600">ETH Apoiado</div>
           </div>
           <div className="text-center">
             <div className={`text-3xl font-bold bg-gradient-to-r ${tiers[userStats.currentTier]?.color} bg-clip-text text-transparent`}>
@@ -142,8 +142,8 @@ const FanTokenSection = () => {
             <div
               key={tier.name}
               className={`relative p-6 rounded-lg border-2 transition-all duration-300 ${userStats.currentTier === index
-                  ? 'border-purple-500 bg-purple-50 scale-105'
-                  : 'border-gray-200 hover:border-gray-300'
+                ? 'border-purple-500 bg-purple-50 scale-105'
+                : 'border-gray-200 hover:border-gray-300'
                 }`}
             >
               {userStats.currentTier === index && (

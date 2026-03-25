@@ -1,6 +1,4 @@
-import React from 'react';
 import TargetImage from "../assets/img/alvo.png";
-import Partners from "./Partners";
 import Parceiro1 from "../assets/img/parceiros/parceiro1.png";
 import Parceiro2 from "../assets/img/parceiros/parceiro2.png";
 import Parceiro3 from "../assets/img/parceiros/parceiro3.png";
@@ -10,13 +8,13 @@ import BTB from "../assets/img/parceiros/btb.png";
 // ...existing code...
 
 const partnersData = [
-    { name: "BTB", image: BTB },
+  { name: "BTB", image: BTB },
   { name: "Parceiro 1", image: Parceiro1 },
   { name: "Parceiro 2", image: Parceiro2 },
   { name: "Parceiro 3", image: Parceiro3 },
   { name: "Parceiro 4", image: Parceiro4 },
   { name: "Parceiro 5", image: Parceiro5 },
-  
+
 ];
 
 const Goals = () => {
@@ -32,7 +30,7 @@ const Goals = () => {
         <div className="border-4 border-[#F9C448] p-4 text-center rounded-lg">
           <h3 className="text-xl font-bold mb-4">Meta 2</h3>
           <img src={TargetImage} alt="Alvo" className="mx-auto mb-4 w-30 h-30" />
-          <p className="text-lg">Captar funding de R$800.000 para os projetos da OSC.</p>
+          <p className="text-lg">Captar funding para projetos liderados por Mulheres em diversas áreas.</p>
         </div>
         <div className="border-4 border-[#F9C448] p-4 text-center rounded-lg">
           <h3 className="text-xl font-bold mb-4">Meta 3</h3>

@@ -28,10 +28,10 @@ const Navbar = () => {
               <img src={LogoOriginal} alt="Logo" className="h-8 w-auto" />
             </div>
             <div className="ml-3 hidden sm:block">
-              <span className="text-xl font-bold">Fantoken MSA</span>
+              <span className="text-xl font-bold">Crowdfunding Blockchain</span>
             </div>
             <div className="ml-3 sm:hidden">
-              <span className="text-xl font-bold">Fantoken MSA</span>
+              <span className="text-xl font-bold">Crowdfunding Blockchain</span>
             </div>
           </Link>
 
